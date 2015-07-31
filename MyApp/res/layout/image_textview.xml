@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imageview1"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_height"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp"/>
+       <!--android:src="@drawable/bee_1"--> 
+
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="@dimen/textview_width"
+        android:layout_height="@dimen/textview_height"
+        android:layout_below="@+id/imageview1"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/text_layout"
+        android:layout_marginLeft="100dp"
+        android:gravity="center"
+        android:text="1" />
+
+    <ImageView
+        android:id="@+id/imageview2"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_height"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="450dp"/>
+       <!--  android:src="@drawable/bird_1"  -->
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="@dimen/textview_width"
+        android:layout_height="@dimen/textview_height"
+        android:layout_below="@+id/imageview2"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/text_layout"
+        android:layout_marginLeft="100dp"
+        android:gravity="center"
+        android:text="2" />
+
+    <ImageView
+        android:id="@+id/imageview3"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_height"
+        android:layout_marginLeft="950dp"
+        android:layout_marginTop="450dp"
+         />
+    <!-- android:src="@drawable/calve_1" -->
+
+    <TextView
+        android:id="@+id/textview3"
+        android:layout_width="@dimen/textview_width"
+        android:layout_height="@dimen/textview_height"
+        android:layout_below="@+id/imageview3"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="950dp"
+        android:background="@drawable/text_layout"
+        android:gravity="center"
+        android:text="3" />
+
+    <ImageView
+        android:id="@+id/imageview4"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_height"
+        android:layout_marginLeft="950dp"
+        android:layout_marginTop="100dp"
+         />
+    <!-- android:src="@drawable/chicken_5" -->
+
+    <TextView
+        android:id="@+id/textview4"
+        android:layout_width="@dimen/textview_width"
+        android:layout_height="@dimen/textview_height"
+        android:layout_below="@+id/imageview4"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="950dp"
+        android:background="@drawable/text_layout"
+        android:gravity="center"
+        android:text="4" />
+
+</RelativeLayout>

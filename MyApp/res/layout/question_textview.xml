@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    
+    <TextView android:id="@+id/question_textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="meaoo"
+        android:textColor="@color/background_material_dark"
+        android:layout_marginLeft="500dp"
+        android:layout_marginTop="330dp"
+        android:textSize="@dimen/question_textsize"/>
+    
+    <TextView android:id="@+id/question_textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="booo"
+        android:textColor="@color/background_material_dark"
+       android:layout_marginLeft="500dp"
+        android:layout_marginTop="430dp"
+        android:textSize="@dimen/question_textsize"/>
+    
+    <TextView android:id="@+id/question_textview3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="meaoo"
+        android:textColor="@color/background_material_dark"
+        android:layout_marginLeft="700dp"
+        android:layout_marginTop="330dp"
+        android:textSize="@dimen/question_textsize"/>
+    
+    <TextView android:id="@+id/question_textview4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="meaoo"
+        android:textColor="@color/background_material_dark"
+        android:layout_marginLeft="700dp"
+        android:layout_marginTop="430dp"
+        android:textSize="@dimen/question_textsize"/>
+
+</RelativeLayout>
