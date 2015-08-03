@@ -7,13 +7,13 @@
     <dimen name="textview_height">60dp</dimen>
     <dimen name="question_width">600dp</dimen>
     <dimen name="question_height">70dp</dimen>
-    <dimen name="question_textview_size_margin">25dp</dimen>
+    <dimen name="question_textview_size_margin">40sp</dimen>
     <!-- Image and Text magin -->
     <dimen name="image_text_magin_">10dp</dimen>
     <dimen name="image_width">230dp</dimen>
     <dimen name="image_height">230dp</dimen>
 <!-- question option textview -->
-	<dimen name="question_textsize">25dp</dimen>
+	<dimen name="question_textsize">30sp</dimen>
 
 
 </resources>

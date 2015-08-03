@@ -10,7 +10,8 @@ int anim abc_slide_out_bottom 0x7f040008
 int anim abc_slide_out_top 0x7f040009
 int anim leftslide_textview 0x7f04000a
 int anim move 0x7f04000b
-int anim rigthslide_textview 0x7f04000c
+int anim question_textview_animation 0x7f04000c
+int anim rigthslide_textview 0x7f04000d
 int attr actionBarDivider 0x7f010018
 int attr actionBarItemBackground 0x7f010019
 int attr actionBarPopupTheme 0x7f010012

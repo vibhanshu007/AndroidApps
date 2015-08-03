@@ -1,8 +1,20 @@
 package com.example1.myapp;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,10 +27,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 public class MainActivity extends Activity {
+	private static final JSONObject JSONObject = null;
 	ArrayList<String> imageList, textList;
 	// private int currentDrawable;
 	BitmapImageLoder bitImage;
+	private TextView question1, question2, question3, question4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +44,8 @@ public class MainActivity extends Activity {
 		imageList = new ArrayList<String>();
 		textList = new ArrayList<String>();
 		getImageName();
-		//getTextView();
+		getValueFromJSON();
+
 	}
 
 	@Override
@@ -67,7 +84,18 @@ public class MainActivity extends Activity {
 		TextView answer4 = (TextView) findViewById(R.id.textview4);
 		answer3.startAnimation(anim3);
 		answer4.startAnimation(anim3);
+		Animation anim4 = AnimationUtils.loadAnimation(getApplicationContext(),
+				R.anim.abc_popup_enter);
+		question1 = (TextView) findViewById(R.id.question_textview1);
+		question2 = (TextView) findViewById(R.id.question_textview2);
+		question3 = (TextView) findViewById(R.id.question_textview3);
+		question4 = (TextView) findViewById(R.id.question_textview4);
+		question1.startAnimation(anim4);
+		question2.startAnimation(anim4);
+		question3.startAnimation(anim4);
+		question4.startAnimation(anim4);
 		super.onStart();
+		
 	}
 
 	/*
@@ -99,24 +127,73 @@ public class MainActivity extends Activity {
 
 	}
 
-	/*public void getTextView() {
-		TextView textView1 = (TextView) findViewById(R.id.textview1);
-		TextView textView2 = (TextView) findViewById(R.id.textview2);
-		TextView textView3 = (TextView) findViewById(R.id.textview3);
-		TextView textView4 = (TextView) findViewById(R.id.textview4);
-		File textFile = new File(Environment.getExternalStorageDirectory()
-				.getPath() + "MyApp/name.txt");
-		String[] t = textFile.list();
-		for (int i = 0; i < t.length; i++) {
-			textList.add(t[i]);
+	// ///How to parse JSON Value From the sdCard Importent...
+
+	public void getValueFromJSON() {
+		ArrayList<String> imageName = new ArrayList<String>();
+		try {
+			TextView textView1 = (TextView) findViewById(R.id.question_textview1);
+			TextView textView2 = (TextView) findViewById(R.id.question_textview2);
+			TextView textView3 = (TextView) findViewById(R.id.question_textview3);
+			TextView textView4 = (TextView) findViewById(R.id.question_textview4);
+			File myFile = new File(Environment.getExternalStorageDirectory(),
+					"/MyApp/images.json");
+
+			FileInputStream stream = new FileInputStream(myFile);
+			String jsonStr = null;
+
+			try {
+				FileChannel fc = stream.getChannel();
+				MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0,
+						fc.size());
+				Log.e("Formating", "JSONFromating");
+				jsonStr = Charset.defaultCharset().decode(bb).toString();
+			} finally {
+
+				stream.close();
+			}
+
+			JSONObject jsonObj = new JSONObject(jsonStr);
+
+			// Getting data JSON Array nodes
+			JSONArray data = jsonObj.getJSONArray("Question");
+
+			// looping through All nodes
+			for (int i = 0; i < data.length(); i++) {
+				JSONObject c = data.getJSONObject(i);
+
+				String id = c.getString("name");
+				imageName.add(id);
+				/*
+				 * String title = c.getString("title"); String duration =
+				 * c.getString("duration");
+				 */
+				// use > int id = c.getInt("duration"); if you want get an int
+				// String id1 = c.getString("image");
+
+				// tmp hashmap for single node
+				// HashMap<String, String> parsedData = new HashMap<String,
+				// String>();
+
+				// adding each child node to HashMap key => value
+				/*
+				 * parsedData.put("id", id); parsedData.put("title", title);
+				 * parsedData.put("duration", duration); // do what do you want
+				 * on your interface
+				 */
+			}
+			textList.addAll(imageName);
+			Log.d("textList", "" + textList);
+			Collections.shuffle(textList);
+			textView1.setText(textList.get(0));
+			textView2.setText(textList.get(1));
+			textView3.setText(textList.get(2));
+			textView4.setText(textList.get(3));
+			Log.e("textList", "" + textList.size());
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		Collections.shuffle(textList);
-		textView1.setText(textList.get(0));
-		textView2.setText(textList.get(1));
-		textView3.setText(textList.get(2));
-		textView4.setText(textList.get(3));
-		Log.e("textList", "" + textList.size());
 
-	}*/
-
+	}
 }
