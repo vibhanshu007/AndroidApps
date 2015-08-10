@@ -1,79 +1,126 @@
 package com.example1.myapp;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
-
-
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.content.ClipData;
-import android.os.Build;
-import android.view.DragEvent;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.DragShadowBuilder;
-import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-@SuppressLint("NewApi")
 public class OptionDragAndDrop implements OnTouchListener {
 	MainActivity mainActivityObject;
-	private ArrayList<Integer> dragable_id_object_list;
-	int getIndexOfObjectTODrag, indexOfCurrentObject;
-	boolean isProblemfinished = false;
-	private int currentObjects;
+	private TextView selectedoptiontextView;
+	private ArrayList<String> textOptionIndex;
+	private int Xtemp;
+	private int Ytemp;
+	TextView view;
+	RelativeLayout.LayoutParams tempLayoutParams;
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	@SuppressLint({ "NewApi", "ClickableViewAccessibility" })
+	public OptionDragAndDrop(MainActivity mainActivityObject) {
+		this.mainActivityObject = mainActivityObject;
+	}
+
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		RelativeLayout.LayoutParams tempLayOutParam = new RelativeLayout.LayoutParams(
-				(int) mainActivityObject.getResources().getDimensionPixelSize(
-						R.dimen.textview_width), (int) mainActivityObject
-						.getResources().getDimensionPixelSize(
-								R.dimen.textview_height));
-		if (isProblemfinished)
-			return false;
-		int eventAction = event.getAction();
-		
-		int X = (int) event.getX();
-		int Y = (int) event.getY();
-		switch (event.getAction()) {
+		try {
+			tempLayoutParams = new RelativeLayout.LayoutParams(
+					(int) mainActivityObject.getResources()
+					.getDimensionPixelSize(R.dimen.layout_width),
+					(int) mainActivityObject.getResources()
+					.getDimensionPixelSize(R.dimen.layout_height));
+
+		} catch (Exception e) {
+
+		}
+
+		int action = event.getAction();
+		switch (action) {
 		case MotionEvent.ACTION_DOWN:
-			tempLayOutParam.setMargins(X,Y,0,0);
-			v.setLayoutParams(tempLayOutParam);
+			v.bringToFront();
+			selectedoptiontextView = null;
+			selectedoptiontextView = getCloneOfTextView((TextView) v,
+					mainActivityObject);
+			Xtemp = (int) event.getRawX() - v.getWidth() / 2;
+			Ytemp = (int) event.getRawY() - v.getHeight() / 2;
+			tempLayoutParams.leftMargin = Xtemp;
+			tempLayoutParams.topMargin = Ytemp;
+			selectedoptiontextView.setLayoutParams(tempLayoutParams);
+			selectedoptiontextView.setTextSize(mainActivityObject
+					.getResources().getDimensionPixelSize(
+							R.dimen.optionMovingTextSize));
 			break;
 		case MotionEvent.ACTION_MOVE:
+			selectedoptiontextView.setLayoutParams(tempLayoutParams);
+			Xtemp = (int) event.getRawX() - v.getWidth() / 2;
+			Ytemp = (int) event.getRawY() - v.getHeight() / 2;
+
+			if (Xtemp > mainActivityObject.getResources()
+					.getDimensionPixelSize(R.dimen.window_width)
+					- selectedoptiontextView.getWidth() / 2) {
+				Xtemp = mainActivityObject.getResources()
+						.getDimensionPixelSize(R.dimen.window_width)
+						- selectedoptiontextView.getWidth() / 2;
+			}
+			if (Ytemp > mainActivityObject.getWindowManager()
+					.getDefaultDisplay().getHeight()
+					- selectedoptiontextView.getHeight() / 2) {
+				Ytemp = mainActivityObject.getWindowManager()
+						.getDefaultDisplay().getHeight()
+						- selectedoptiontextView.getHeight() / 2;
+			}
+			if (Xtemp < 0) {
+				Xtemp = 0;
+			}
+			if (Ytemp < 0) {
+				Ytemp = 0;
+			}
+			tempLayoutParams.leftMargin = Xtemp;
+			tempLayoutParams.topMargin = Ytemp;
+			tempLayoutParams.setMargins(Xtemp, Ytemp, 0, 0);
+			v.setLayoutParams(tempLayoutParams);
+
+			Log.d("1111111111111", "" + Xtemp + "," + Ytemp);
 			break;
 		case MotionEvent.ACTION_UP:
+			
+			v.setBackgroundColor(Color.TRANSPARENT);
+
 			break;
+
 		}
-		return false;
+		return true;
+
 	}
-	private int getIndexOfObjectToDrag(int X,int Y){
-		MainActivity mainActivityObject;
-		int objectIndexToMove = -1;
-		for(int dragableIndex : dragable_id_object_list){
-		
+
+	public static TextView getCloneOfTextView(TextView originalView,
+			MainActivity applicationObject) {
+		TextView cloneView = new TextView(applicationObject);
+		if (null != originalView) {
+			cloneView.setText(originalView.getText());
+			cloneView.setTextSize(originalView.getTextSize());
+			cloneView.setTextColor(originalView.getTextColors());
+			cloneView.setGravity(originalView.getGravity());
+			cloneView.setTypeface(originalView.getTypeface());
+			cloneView.setPadding(0, 0, 0, 0);
+
+			getCommonViewAttributes(originalView, cloneView);
+
+		} else {
+			cloneView = null;
+		}
+
+		return cloneView;
 	}
-	return objectIndexToMove;
-		
-		
+
+	private static void getCommonViewAttributes(View originalView,
+			View cloneView) {
+		cloneView.setTag(originalView.getTag());
+		cloneView.setId(originalView.getId());
+
 	}
 
 }
-
-// =================>>>>> Use For Long Touch <<<<<===================
-
-/*
- * class MyDragListener implements OnDragListener{
- * 
- * @Override public boolean onDrag(View v, DragEvent event) {
- * switch(event.getAction()){ case DragEvent.ACTION_DRAG_STARTED: break; case
- * DragEvent.ACTION_DRAG_EXITED:
- * 
- * break; case DragEvent.ACTION_DRAG_ENTERED: break; case DragEvent.ACTION_DROP:
- * break; case DragEvent.ACTION_DRAG_ENDED: default: break; } return true; } }
- */
-

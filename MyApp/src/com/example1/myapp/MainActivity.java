@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -34,7 +35,9 @@ public class MainActivity extends Activity {
 	ArrayList<String> imageList, textList;
 	// private int currentDrawable;
 	BitmapImageLoder bitImage;
-	private TextView question1, question2, question3, question4;
+	private TextView question1, question2, question3, question4, textAnswer1,
+			textAnswer2, textAnswer3, textAnswer4;
+	private ArrayList<Point> answerPlaceHolder;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +48,28 @@ public class MainActivity extends Activity {
 		textList = new ArrayList<String>();
 		getImageName();
 		getValueFromJSON();
-
+		TextView textAnswer1 = (TextView) findViewById(R.id.question_textview1);
+		TextView textAnswer2 = (TextView) findViewById(R.id.question_textview2);
+		TextView textAnswer3 = (TextView) findViewById(R.id.question_textview3);
+		TextView textAnswer4 = (TextView) findViewById(R.id.question_textview4);
+		textAnswer1.setOnTouchListener(new OptionDragAndDrop(this));
+		textAnswer2.setOnTouchListener(new OptionDragAndDrop(this));
+		textAnswer3.setOnTouchListener(new OptionDragAndDrop(this));
+		textAnswer4.setOnTouchListener(new OptionDragAndDrop(this));
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			String text = "clicked at X" + event.getX() + "clicked at Y"
-					+ event.getX();
-			Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-
-			System.out.println((int) event.getX() + "," + (int) event.getY());
-			Log.v("IN DP --->", (int) event.getX() / 1.5 + "" + ","
-					+ (int) event.getY() / 1.5);
-		}
-		return super.onTouchEvent(event);
-
-	}
+	/*
+	 * @Override public boolean onTouchEvent(MotionEvent event) { if
+	 * (event.getAction() == MotionEvent.ACTION_DOWN) { String text =
+	 * "clicked at X" + event.getX() + "clicked at Y" + event.getX();
+	 * Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+	 * 
+	 * System.out.println((int) event.getX() + "," + (int) event.getY());
+	 * Log.v("IN DP --->", (int) event.getX() / 1.5 + "" + "," + (int)
+	 * event.getY() / 1.5); } return super.onTouchEvent(event);
+	 * 
+	 * }
+	 */
 
 	@Override
 	protected void onStart() {
@@ -95,7 +103,7 @@ public class MainActivity extends Activity {
 		question3.startAnimation(anim4);
 		question4.startAnimation(anim4);
 		super.onStart();
-		
+
 	}
 
 	/*
@@ -194,9 +202,18 @@ public class MainActivity extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	
-	
+	public void getTextCoordinate() {
+		
+	}
+
+	public ArrayList<Point> getAnswerPlaceHolder() {
+		return getAnswerPlaceHolder();
+	}
+
+	public void setAnswerPlaceHolder(ArrayList<Point> answerPlaceHolder) {
+		this.answerPlaceHolder = answerPlaceHolder;
+	}
+
 }
