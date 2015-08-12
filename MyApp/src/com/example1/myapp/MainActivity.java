@@ -209,7 +209,7 @@ public class MainActivity extends Activity {
 	}
 
 	public ArrayList<Point> getAnswerPlaceHolder() {
-		return getAnswerPlaceHolder();
+		return answerPlaceHolder;
 	}
 
 	public void setAnswerPlaceHolder(ArrayList<Point> answerPlaceHolder) {

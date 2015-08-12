@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import android.graphics.Color;
+import android.nfc.Tag;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.webkit.WebView.FindListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -86,11 +88,20 @@ public class OptionDragAndDrop implements OnTouchListener {
 			Log.d("1111111111111", "" + Xtemp + "," + Ytemp);
 			break;
 		case MotionEvent.ACTION_UP:
+			for(int i=0;i<mainActivityObject.getAnswerPlaceHolder().size();i++){
+				if ((Xtemp>mainActivityObject.getAnswerPlaceHolder().get(i).x-(selectedoptiontextView.getWidth()/2)&&
+				Xtemp<mainActivityObject.getAnswerPlaceHolder().get(i).x+(selectedoptiontextView.getWidth()/2)&&	
+				Ytemp>mainActivityObject.getAnswerPlaceHolder().get(i).y-(selectedoptiontextView.getHeight()/2)&&
+				Ytemp<mainActivityObject.getAnswerPlaceHolder().get(i).y+(selectedoptiontextView.getHeight()/2))){
+					
+				}
+			}
 			
-			v.setBackgroundColor(Color.TRANSPARENT);
+			
+			//v.setBackgroundColor(Color.TRANSPARENT);
 
 			break;
-
+			 
 		}
 		return true;
 
@@ -122,5 +133,6 @@ public class OptionDragAndDrop implements OnTouchListener {
 		cloneView.setId(originalView.getId());
 
 	}
+
 
 }
