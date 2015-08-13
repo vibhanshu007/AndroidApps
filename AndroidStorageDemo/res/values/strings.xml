@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AndroidStorageDemo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="edittext_hint">Enter your Text</string>
+	<string name="button_save"> Save</string>
+	<string name="save_to_Second_activity">Go to Second Activity</string>
+	<string name="info">After saving, on subsequent launch go to second activity without saving. You will still see the saved data.</string>
+ 	
+</resources>
