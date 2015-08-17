@@ -205,7 +205,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void getTextCoordinate() {
-		
+
 	}
 
 	public ArrayList<Point> getAnswerPlaceHolder() {

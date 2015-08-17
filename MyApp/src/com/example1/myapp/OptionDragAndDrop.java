@@ -29,11 +29,7 @@ public class OptionDragAndDrop implements OnTouchListener {
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		try {
-			tempLayoutParams = new RelativeLayout.LayoutParams(
-					(int) mainActivityObject.getResources()
-					.getDimensionPixelSize(R.dimen.layout_width),
-					(int) mainActivityObject.getResources()
-					.getDimensionPixelSize(R.dimen.layout_height));
+			tempLayoutParams = new RelativeLayout.LayoutParams((int) mainActivityObject.getResources().getDimensionPixelSize(R.dimen.layout_width),(int) mainActivityObject.getResources().getDimensionPixelSize(R.dimen.layout_height));
 
 		} catch (Exception e) {
 
@@ -88,20 +84,26 @@ public class OptionDragAndDrop implements OnTouchListener {
 			Log.d("1111111111111", "" + Xtemp + "," + Ytemp);
 			break;
 		case MotionEvent.ACTION_UP:
-			for(int i=0;i<mainActivityObject.getAnswerPlaceHolder().size();i++){
-				if ((Xtemp>mainActivityObject.getAnswerPlaceHolder().get(i).x-(selectedoptiontextView.getWidth()/2)&&
-				Xtemp<mainActivityObject.getAnswerPlaceHolder().get(i).x+(selectedoptiontextView.getWidth()/2)&&	
-				Ytemp>mainActivityObject.getAnswerPlaceHolder().get(i).y-(selectedoptiontextView.getHeight()/2)&&
-				Ytemp<mainActivityObject.getAnswerPlaceHolder().get(i).y+(selectedoptiontextView.getHeight()/2))){
-					
+			for (int i = 0; i < mainActivityObject.getAnswerPlaceHolder()
+					.size(); i++) {
+				if ((Xtemp > mainActivityObject.getAnswerPlaceHolder().get(i).x
+				- (selectedoptiontextView.getWidth() / 2)
+				&& Xtemp < mainActivityObject.getAnswerPlaceHolder()
+				.get(i).x
+				+ (selectedoptiontextView.getWidth() / 2)
+				&& Ytemp > mainActivityObject.getAnswerPlaceHolder()
+				.get(i).y
+				- (selectedoptiontextView.getHeight() / 2) && Ytemp < mainActivityObject
+				.getAnswerPlaceHolder().get(i).y
+				+ (selectedoptiontextView.getHeight() / 2))) {
+
 				}
 			}
-			
-			
-			//v.setBackgroundColor(Color.TRANSPARENT);
+
+			// v.setBackgroundColor(Color.TRANSPARENT);
 
 			break;
-			 
+
 		}
 		return true;
 
@@ -133,6 +135,5 @@ public class OptionDragAndDrop implements OnTouchListener {
 		cloneView.setId(originalView.getId());
 
 	}
-
 
 }
